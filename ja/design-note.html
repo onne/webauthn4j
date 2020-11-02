@@ -444,7 +444,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#デザインノート">1. デザインノート</a>
 <ul class="sectlevel2">
-<li><a href="#各クラスの責務分担">1.1. 各クラスの責務分担</a></li>
+<li><a href="#データクラスのメンバのnullability">1.1. データクラスのメンバのNullability</a></li>
+<li><a href="#各クラスの責務分担">1.2. 各クラスの責務分担</a></li>
 </ul>
 </li>
 </ul>
@@ -455,22 +456,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="デザインノート"><a class="anchor" href="#デザインノート"></a>1. デザインノート</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="各クラスの責務分担"><a class="anchor" href="#各クラスの責務分担"></a>1.1. 各クラスの責務分担</h3>
+<h3 id="データクラスのメンバのnullability"><a class="anchor" href="#データクラスのメンバのnullability"></a>1.1. データクラスのメンバのNullability</h3>
+<div class="paragraph">
+<p>WebAuthn, CTAPで定義されたデータ型は、たとえRequiredと仕様で指定されていても、Nullableとする
+これは、JSONなどでシリアライズされたデータを受け入れる際に、誤った値が入る可能性が在る為。
+WebAuthn4J独自のデータクラスでも、シリアライズされたデータを受けるための型はフィールドをNullableとする
+シリアライズされたデータを受け取らない方は、必要性に応じてNullabilityを設計する　</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="各クラスの責務分担"><a class="anchor" href="#各クラスの責務分担"></a>1.2. 各クラスの責務分担</h3>
 <div class="sect3">
-<h4 id="registrationrequest-authenticationrequest"><a class="anchor" href="#registrationrequest-authenticationrequest"></a>1.1.1. <code>RegistrationRequest</code>, <code>AuthenticationRequest</code></h4>
+<h4 id="registrationrequest-authenticationrequest"><a class="anchor" href="#registrationrequest-authenticationrequest"></a>1.2.1. <code>RegistrationRequest</code>, <code>AuthenticationRequest</code></h4>
 <div class="paragraph">
 <p>登録時、認証時にWebAuthn APIを通じてブラウザから取得するパラメータを集めたクラス</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="registrationparameters-authenticationparameters"><a class="anchor" href="#registrationparameters-authenticationparameters"></a>1.1.2. <code>RegistrationParameters</code>, <code>AuthenticationParameters</code></h4>
+<h4 id="registrationparameters-authenticationparameters"><a class="anchor" href="#registrationparameters-authenticationparameters"></a>1.2.2. <code>RegistrationParameters</code>, <code>AuthenticationParameters</code></h4>
 <div class="paragraph">
 <p>登録時、認証時に必要なその他の条件（サーバーの状態や、認証対象の永続化されたAuthenticator、期待される検証条件など）を
 集めたクラス</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="serverproperty"><a class="anchor" href="#serverproperty"></a>1.1.3. <code>ServerProperty</code></h4>
+<h4 id="serverproperty"><a class="anchor" href="#serverproperty"></a>1.2.3. <code>ServerProperty</code></h4>
 <div class="paragraph">
 <p>バリデーション実施にあたり、サーバー側で関係するプロパティを渡すためのDTO</p>
 </div>
@@ -486,7 +496,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="footer">
 <div id="footer-text">
 Version 0.14.1-SNAPSHOT<br>
-Last updated 2020-11-01 16:33:37 UTC
+Last updated 2020-11-02 14:58:51 UTC
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
